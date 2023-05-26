@@ -1,0 +1,46 @@
+import random
+
+# Mario Game
+def play_mario_game():
+    mario_position = 0
+    max_position = 10
+    game_over = False
+
+    print("Welcome to the Mario Game!")
+
+    while not game_over:
+        print("-" * (max_position + 2))  # Print the ground
+        print(" " * mario_position + "M")  # Print Mario
+        print("-" * (max_position + 2))  # Print the ground
+
+        choice = input("Press 'A' to move left, 'D' to move right, or 'Q' to quit: ")
+
+        if choice.upper() == "A":
+            mario_position -= 1
+        elif choice.upper() == "D":
+            mario_position += 1
+        elif choice.upper() == "Q":
+            game_over = True
+        else:
+            print("Invalid choice. Please try again.")
+
+        # Check if Mario reaches the edge
+        if mario_position < 0:
+            mario_position = 0
+            print("Mario hit the left edge!")
+        elif mario_position > max_position:
+            mario_position = max_position
+            print("Mario hit the right edge!")
+
+        # Randomly generate obstacles
+        obstacle_chance = random.randint(1, 10)
+        if obstacle_chance == 1:
+            print("An obstacle appeared!")
+            if mario_position == max_position:
+                print("Mario hit the obstacle and lost!")
+                game_over = True
+
+    print("Game Over. Thanks for playing!")
+
+# Start the game
+play_mario_game()
